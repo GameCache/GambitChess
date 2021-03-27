@@ -12,13 +12,11 @@
 </ul>
 <h2>Blog:</h2>
 <ul>
-    {% for page in site.html_pages %}
-    {% if page.url contains 'blog' %}
+    {% for post in site.posts %}
     <li>
         <h3>
-            <a href="{{ site.baseurl}}{{ page.url }}">{{page.title}}</a>
+            <a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a>
         </h3>
     </li>
-    {% endif %}
     {% endfor %}
 </ul>
