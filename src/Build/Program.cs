@@ -11,6 +11,9 @@ namespace Build
         /// <summary>Base directory for all output.</summary>
         private static readonly string _ArtifactDir = Path.Combine(Directory.GetCurrentDirectory(), "artifacts");
 
+        /// <summary>List of projects to include in building.</summary>
+        private static readonly string[] _Projects = new[] { "Game", "Multiplayer", "Server", "Terminal" };
+
         /// <summary>Console application entry point.</summary>
         public static async Task Main(string[] args)
         {
@@ -31,10 +34,13 @@ namespace Build
         /// <summary>Builds the solution.</summary>
         private static async Task Compile()
         {
-            await RunAsync("dotnet", $"build src/Game --no-restore --configuration Debug");
-            await RunAsync("dotnet", $"build src/Game --no-restore --configuration Release");
-            await RunAsync("dotnet", $"build tests/GameTests --no-restore --configuration Debug");
-            await RunAsync("dotnet", $"build tests/GameTests --no-restore --configuration Release");
+            foreach (string project in _Projects)
+            {
+                await RunAsync($"dotnet", $"build src/{project} --no-restore --configuration Debug");
+                await RunAsync($"dotnet", $"build src/{project} --no-restore --configuration Release");
+                await RunAsync($"dotnet", $"build tests/{project}Tests --no-restore --configuration Debug");
+                await RunAsync($"dotnet", $"build tests/{project}Tests --no-restore --configuration Release");
+            }
         }
 
         /// <summary>Tests the solution.</summary>

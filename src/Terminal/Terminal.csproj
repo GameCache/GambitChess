@@ -1,6 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
@@ -8,6 +9,10 @@
   <ItemGroup>
     <PackageReference Include="MinVer" Version="2.4.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.9.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Multiplayer\Multiplayer.csproj" />
   </ItemGroup>
 
 </Project>

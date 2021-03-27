@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.9.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Game\Game.csproj" />
+  </ItemGroup>
+
 </Project>
