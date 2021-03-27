@@ -1,0 +1,22 @@
+<h2>General:</h2>
+<ul>
+    {% for page in site.html_pages %}
+    {% unless page.url contains 'blog' %}
+    <li>
+        <h3>
+            <a href="{{ site.baseurl}}{{ page.url }}">{{page.title}}</a>
+        </h3>
+    </li>
+    {% endunless %}
+    {% endfor %}
+</ul>
+<h2>Blog:</h2>
+<ul>
+    {% for post in site.posts %}
+    <li>
+        <h3>
+            <a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a>
+        </h3>
+    </li>
+    {% endfor %}
+</ul>

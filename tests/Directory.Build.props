@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>false</IsPackable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <RootNamespace>GambitChess.$(MSBuildProjectName)</RootNamespace>
+    <BaseIntermediateOutputPath>..\..\artifacts\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <OutputPath>..\..\artifacts\bin\$(MSBuildProjectName)\$(Configuration)\</OutputPath>
+    <DocumentationFile>..\..\artifacts\bin\$(MSBuildProjectName)\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
+    <RunSettingsFilePath>..\TestSettings.runsettings</RunSettingsFilePath>
+    <CodeAnalysisRuleSet>..\TestRules.ruleset</CodeAnalysisRuleSet>
+    <IsTestProject>true</IsTestProject>
+    <NoWarn>$(NoWarn);CA1014</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>FakerTypes</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+</Project>
