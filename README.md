@@ -26,6 +26,5 @@ View the [license](LICENSE.txt) file for more details.
 * [xUnit](https://xunit.github.io/): For running tests.
 * [Coverlet](https://github.com/tonerdo/coverlet) + [ReportGenerator](https://danielpalme.github.io/ReportGenerator/) + [CodeCov](https://codecov.io/): For test coverage.
 * [Bullseye](https://github.com/adamralph/bullseye) + [SimpleExec](https://github.com/adamralph/simple-exec) + [MinVer](https://github.com/adamralph/minver): For project building.
-* [Codacy](https://www.codacy.com/): For code analysis.
 * [GitHub](https://github.com/): For hosting code.
 * [Microsoft](https://visualstudio.microsoft.com/vs/features/net-development/): For C# and editors.

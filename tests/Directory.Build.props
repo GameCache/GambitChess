@@ -1,19 +1,30 @@
 <Project>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <RootNamespace>GambitChess.$(MSBuildProjectName)</RootNamespace>
-    <BaseIntermediateOutputPath>..\..\artifacts\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-    <OutputPath>..\..\artifacts\bin\$(MSBuildProjectName)\$(Configuration)\</OutputPath>
-    <DocumentationFile>..\..\artifacts\bin\$(MSBuildProjectName)\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
-    <RunSettingsFilePath>..\TestSettings.runsettings</RunSettingsFilePath>
-    <CodeAnalysisRuleSet>..\TestRules.ruleset</CodeAnalysisRuleSet>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\artifacts\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+    <OutputPath>$(MSBuildThisFileDirectory)..\artifacts\bin\$(MSBuildProjectName)\$(Configuration)\</OutputPath>
+    <DocumentationFile>$(MSBuildThisFileDirectory)..\artifacts\bin\$(MSBuildProjectName)\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
+    <RunSettingsFilePath>$(MSBuildThisFileDirectory)TestSettings.runsettings</RunSettingsFilePath>
     <IsTestProject>true</IsTestProject>
-    <NoWarn>$(NoWarn);CA1014</NoWarn>
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CreateAndFake" Version="1.9.11" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" PrivateAssets="All" />
+    <PackageReference Include="coverlet.collector" Version="3.0.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.10.0" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="CLSCompliantAttribute">
+      <_Parameter1>true</_Parameter1>
+    </AssemblyAttribute>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>FakerTypes</_Parameter1>
     </AssemblyAttribute>
