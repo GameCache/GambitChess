@@ -11,6 +11,9 @@ namespace GambitChess.Game.Boards
 
         internal Side CurrentTurn => _turnOrder[_current];
 
+        /// <summary>Initializes a new instance of the <see cref="TurnKeeper"/> class.</summary>
+        /// <param name="currentTurnIndex"></param>
+        /// <param name="turnOrder"></param>
         internal TurnKeeper(int currentTurnIndex, params Side[] turnOrder)
         {
             if (currentTurnIndex < 0 || currentTurnIndex >= turnOrder.Length)

@@ -1,5 +1,4 @@
-﻿using CreateAndFake;
-using CreateAndFake.Fluent;
+﻿using CreateAndFake.Fluent;
 using GambitChess.Terminal;
 using Xunit;
 
@@ -13,10 +12,10 @@ namespace GambitChess.TerminalTests
             Program.Exists.Assert().Is(true);
         }
 
-        [Theory, RandomData]
-        internal static void Main_Runs(string[] args)
+        [Fact]
+        internal static void Main_Runs()
         {
-            Program.Main(args);
+            Program.Main();
         }
     }
 }

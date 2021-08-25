@@ -3,7 +3,8 @@ namespace GambitChess.Game.Pieces.Types
     /// <inheritdoc/>
     internal sealed class Rook : Piece
     {
-        /// <inheritdoc/>
+        /// <summary>Initializes a new instance of the <see cref="Rook"/> class.</summary>
+        /// <param name="side"></param>
         internal Rook(Side side) : base((side == Side.White) ? 'R' : 'r', new Movement[]
         {
             new Movement(-1, 0, true, true, false),

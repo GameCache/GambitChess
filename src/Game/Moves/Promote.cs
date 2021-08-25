@@ -18,6 +18,10 @@ namespace GambitChess.Game.Moves
 
         public IPiece Promotion { get; }
 
+        /// <summary>Initializes a new instance of the <see cref="Promote"/> class.</summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="promotion"></param>
         public Promote(Square start, Square end, IPiece promotion)
         {
             Start = start;

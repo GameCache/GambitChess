@@ -12,11 +12,16 @@ namespace GambitChess.Game.Pieces.Types
 
         private readonly int _changeY;
 
-        /// <inheritdoc/>
+        /// <summary>Initializes a new instance of the <see cref="Pawn"/> class.</summary>
+        /// <param name="side"></param>
+        /// <param name="promotions"></param>
         internal Pawn(Side side, IEnumerable<IPiece> promotions)
          : this(side, promotions, (side == Side.White) ? -1 : 1) { }
 
-        /// <inheritdoc/>
+        /// <summary>Initializes a new instance of the <see cref="Pawn"/> class.</summary>
+        /// <param name="side"></param>
+        /// <param name="promotions"></param>
+        /// <param name="changeY"></param>
         private Pawn(Side side, IEnumerable<IPiece> promotions, int changeY)
             : base((side == Side.White) ? 'P' : 'p', new Movement[]
         {

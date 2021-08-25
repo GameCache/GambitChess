@@ -37,5 +37,11 @@ namespace GambitChess.Game.Moves
         {
             return _kingMove.Changes().Concat(_rookMove.Changes());
         }
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return _kingMove.ToString();
+        }
     }
 }

@@ -7,7 +7,8 @@ namespace GambitChess.Game.Pieces.Types
     /// <inheritdoc/>
     internal sealed class King : Piece
     {
-        /// <inheritdoc/>
+        /// <summary>Initializes a new instance of the <see cref="King"/> class.</summary>
+        /// <param name="side"></param>
         internal King(Side side) : base((side == Side.White) ? 'K' : 'k', new Movement[]
         {
             new Movement(-1, -1, false, true, false),

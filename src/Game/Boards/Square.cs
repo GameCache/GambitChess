@@ -24,6 +24,10 @@ namespace GambitChess.Game.Boards
             Promotes = false;
         }
 
+        /// <summary>Initializes a new instance of the <see cref="Square"/> class.</summary>
+        /// <param name="id"></param>
+        /// <param name="pawnBoost"></param>
+        /// <param name="promotes"></param>
         public Square(string id, bool pawnBoost, bool promotes)
         {
             _id = id;

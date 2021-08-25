@@ -10,21 +10,27 @@ namespace GambitChess.Terminal
         internal static bool Exists { get; } = true;
 
         ///
-        public static void Main(string[] args)
+        public static void Main()
         {
             IPlayerBoard game = Variant.Standard.SetupBoard();
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine(game);
                 Console.WriteLine(game.DebugPrint());
                 Console.WriteLine(string.Join(',', game.GenerateMoves()));
 
-                string? input = Console.ReadLine();
+                string input = Console.ReadLine() ?? "";
                 if (input == "quit")
                 {
                     break;
                 }
-                game.Make(input);
+
+                try
+                {
+                    _ = game.Make(input);
+                }
+                catch (InvalidOperationException) { }
             }
         }
     }

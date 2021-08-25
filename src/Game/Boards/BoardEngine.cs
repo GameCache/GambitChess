@@ -19,6 +19,10 @@ namespace GambitChess.Game.Boards
 
         private readonly IDictionary<Square, int> _changed;
 
+        /// <summary>Initializes a new instance of the <see cref="BoardEngine"/> class.</summary>
+        /// <param name="set"></param>
+        /// <param name="setup"></param>
+        /// <param name="turn"></param>
         public BoardEngine(PieceSet set, Square[][] setup, TurnKeeper turn)
         {
             _set = set;
@@ -242,7 +246,7 @@ namespace GambitChess.Game.Boards
             int lastCap = 0;
             for (int i = _history.Count - 1; i > 0; i--)
             {
-                if (_history[i] is not Move current || current.IsCapture)
+                if (_history[i].GetType() != typeof(Move) || _history[i].IsCapture)
                 {
                     break;
                 }

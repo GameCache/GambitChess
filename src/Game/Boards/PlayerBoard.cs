@@ -7,6 +7,8 @@ namespace GambitChess.Game.Boards
     {
         private readonly IBoardEngine _board;
 
+        /// <summary>Initializes a new instance of the <see cref="PlayerBoard"/> class.</summary>
+        /// <param name="board"></param>
         internal PlayerBoard(IBoardEngine board)
         {
             _board = board;
