@@ -8,14 +8,14 @@ using Xunit;
 
 namespace GambitChess.GameTests.Moves
 {
-    public static class MoveTests
+    public static class PawnPushTests
     {
         [Theory, RandomData]
         internal static void Make_MovesContent(Square start, Square end)
         {
             IPiece? piece = start.Content;
 
-            Move instance = new(start, end);
+            PawnPush instance = new(start, end);
             instance.Make();
 
             start.Content.Assert().Is(null);
@@ -28,7 +28,7 @@ namespace GambitChess.GameTests.Moves
             Square startCopy = start.CreateDeepClone();
             Square endCopy = end.CreateDeepClone();
 
-            Move instance = new(start, end);
+            PawnPush instance = new(start, end);
             instance.Make();
             instance.Undo();
 
@@ -39,15 +39,15 @@ namespace GambitChess.GameTests.Moves
         [Theory, RandomData]
         internal static void Changes_GivesAllSquares(Square start, Square end)
         {
-            new Move(start, end).Changes().ToArray().Assert().Is(new[] { start, end });
+            new PawnPush(start, end).Changes().ToArray().Assert().Is(new[] { start, end });
         }
 
         [Theory, RandomData]
         internal static void IsCapture_MatchesEndContent(Square start, Square end)
         {
-            new Move(start, end).IsCapture.Assert().Is(true);
+            new PawnPush(start, end).IsCapture.Assert().Is(true);
             end.Content = null;
-            new Move(start, end).IsCapture.Assert().Is(false);
+            new PawnPush(start, end).IsCapture.Assert().Is(false);
         }
     }
 }

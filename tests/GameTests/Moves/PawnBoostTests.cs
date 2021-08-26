@@ -8,14 +8,14 @@ using Xunit;
 
 namespace GambitChess.GameTests.Moves
 {
-    public static class MoveTests
+    public static class PawnBoostTests
     {
         [Theory, RandomData]
-        internal static void Make_MovesContent(Square start, Square end)
+        internal static void Make_MovesContent(Square start, Square end, Square skipped)
         {
             IPiece? piece = start.Content;
 
-            Move instance = new(start, end);
+            PawnBoost instance = new(start, end, skipped);
             instance.Make();
 
             start.Content.Assert().Is(null);
@@ -23,12 +23,12 @@ namespace GambitChess.GameTests.Moves
         }
 
         [Theory, RandomData]
-        internal static void Undo_FullyResets(Square start, Square end)
+        internal static void Undo_FullyResets(Square start, Square end, Square skipped)
         {
             Square startCopy = start.CreateDeepClone();
             Square endCopy = end.CreateDeepClone();
 
-            Move instance = new(start, end);
+            PawnBoost instance = new(start, end, skipped);
             instance.Make();
             instance.Undo();
 
@@ -37,17 +37,15 @@ namespace GambitChess.GameTests.Moves
         }
 
         [Theory, RandomData]
-        internal static void Changes_GivesAllSquares(Square start, Square end)
+        internal static void Changes_GivesAllSquares(Square start, Square end, Square skipped)
         {
-            new Move(start, end).Changes().ToArray().Assert().Is(new[] { start, end });
+            new PawnBoost(start, end, skipped).Changes().ToArray().Assert().Is(new[] { start, end });
         }
 
         [Theory, RandomData]
-        internal static void IsCapture_MatchesEndContent(Square start, Square end)
+        internal static void Skipped_MatchesGiven(Square start, Square end, Square skipped)
         {
-            new Move(start, end).IsCapture.Assert().Is(true);
-            end.Content = null;
-            new Move(start, end).IsCapture.Assert().Is(false);
+            new PawnBoost(start, end, skipped).Skipped.Assert().Is(skipped);
         }
     }
 }

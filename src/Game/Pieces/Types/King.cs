@@ -33,16 +33,16 @@ namespace GambitChess.Game.Pieces.Types
                 if (kingsideCastle != null)
                 {
                     yield return new Castle(
-                        new Move(container, board.CheckSpace(x + 2, y)),
-                        new Move(kingsideCastle, board.CheckSpace(x + 1, y)));
+                        container, board.CheckSpace(x + 2, y),
+                        kingsideCastle, board.CheckSpace(x + 1, y));
                 }
 
                 Square? queensideCastle = FindCastlingTarget(threats, board, x, y, -1);
                 if (queensideCastle != null)
                 {
                     yield return new Castle(
-                        new Move(container, board.CheckSpace(x - 2, y)),
-                        new Move(queensideCastle, board.CheckSpace(x - 1, y)));
+                        container, board.CheckSpace(x - 2, y),
+                        queensideCastle, board.CheckSpace(x - 1, y));
                 }
             }
 

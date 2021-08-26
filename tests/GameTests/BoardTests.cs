@@ -1,6 +1,5 @@
 ﻿using CreateAndFake.Fluent;
 using GambitChess.Game;
-using GambitChess.Game.Boards;
 using Xunit;
 
 namespace GambitChess.GameTests
@@ -10,13 +9,13 @@ namespace GambitChess.GameTests
         [Fact]
         internal static void Test()
         {
-            ((PlayerBoard)Variant.Standard.SetupBoard()).DebugPrint().Assert().Fail();
+            Variant.Standard.SetupBoard().DebugPrint().Assert().IsNot(null);
         }
 
         [Fact]
         internal static void Test2()
         {
-            Variant.Standard.SetupBoard().ToString().Assert().Fail();
+            Variant.Standard.SetupBoard().ToString().Assert().IsNot(null);
         }
     }
 }
