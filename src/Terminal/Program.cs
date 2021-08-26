@@ -4,12 +4,10 @@ using GambitChess.Game.Boards;
 
 namespace GambitChess.Terminal
 {
-    ///
+    /// <summary>Handles running chess on the console.</summary>
     public static class Program
     {
-        internal static bool Exists { get; } = true;
-
-        ///
+        /// <summary>Application entry point.</summary>
         public static void Main()
         {
             IPlayerBoard game = Variant.Standard.SetupBoard();
@@ -21,16 +19,25 @@ namespace GambitChess.Terminal
                 Console.WriteLine(string.Join(',', game.GenerateMoves()));
 
                 string input = Console.ReadLine() ?? "";
+                switch (input)
+                {
+                    default:
+                        try
+                        {
+                            game.Make(input);
+                        }
+                        catch (InvalidOperationException) { }
+                        break;
+                    case "undo":
+                        game.Undo();
+                        break;
+                    case "quit":
+                        return;
+                }
                 if (input == "quit")
                 {
                     break;
                 }
-
-                try
-                {
-                    _ = game.Make(input);
-                }
-                catch (InvalidOperationException) { }
             }
         }
     }

@@ -9,10 +9,16 @@ namespace GambitChess.Game.Boards
         /// <returns>Found moves.</returns>
         IEnumerable<string> GenerateMoves();
 
-        string Make(string move);
+        /// <summary>Finds and makes the move on the board.</summary>
+        /// <param name="move">Move to make.</param>
+        void Make(string move);
 
-        string Undo(int count = 1);
+        /// <summary>Unmakes <paramref name="count"/> moves on the board.</summary>
+        /// <param name="count">Number of moves to undo.</param>
+        void Undo(int count = 1);
 
+        /// <summary>Temporary full detailed print of the board.</summary>
+        /// <returns>Representation of the board.</returns>
         string DebugPrint();
     }
 }

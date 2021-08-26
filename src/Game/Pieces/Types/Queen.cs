@@ -4,7 +4,7 @@ namespace GambitChess.Game.Pieces.Types
     internal sealed class Queen : Piece
     {
         /// <summary>Initializes a new instance of the <see cref="Queen"/> class.</summary>
-        /// <param name="side"></param>
+        /// <param name="side">Which side this piece is on.</param>
         internal Queen(Side side) : base((side == Side.White) ? 'Q' : 'q', new Movement[]
         {
             new Movement(-1, 0, true, true, false),

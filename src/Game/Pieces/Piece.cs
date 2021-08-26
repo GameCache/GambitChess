@@ -9,14 +9,19 @@ namespace GambitChess.Game.Pieces
     /// <inheritdoc cref="IPiece"/>
     internal abstract class Piece : IPiece
     {
+        /// <inheritdoc/>
         public char Id { get; }
 
+        /// <inheritdoc/>
         public int MaxStepX { get; }
 
+        /// <inheritdoc/>
         public int MaxStepY { get; }
 
+        /// <inheritdoc/>
         public Side Side { get; }
 
+        /// <summary>Movement patterns for the piece.</summary>
         private readonly Movement[] _moves;
 
         /// <summary>Initializes a new instance of the <see cref="Piece"/> class.</summary>
@@ -46,6 +51,12 @@ namespace GambitChess.Game.Pieces
             return FindMoves(true, board, x, y);
         }
 
+        /// <summary>Generates all possible moves or captures for this piece on the board.</summary>
+        /// <param name="onlyThreats">If only potential captures are returned.</param>
+        /// <param name="board">Current board state.</param>
+        /// <param name="x">This piece's current rank position.</param>
+        /// <param name="y">This piece's current file position.</param>
+        /// <returns>All generated moves or captures.</returns>
         protected IEnumerable<Square> FindMoves(bool onlyThreats, IBoardState board, int x, int y)
         {
             foreach (Movement next in _moves)

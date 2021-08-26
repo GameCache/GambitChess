@@ -8,7 +8,7 @@ namespace GambitChess.Game.Pieces.Types
     internal sealed class King : Piece
     {
         /// <summary>Initializes a new instance of the <see cref="King"/> class.</summary>
-        /// <param name="side"></param>
+        /// <param name="side">Which side this piece is on.</param>
         internal King(Side side) : base((side == Side.White) ? 'K' : 'k', new Movement[]
         {
             new Movement(-1, -1, false, true, false),
@@ -52,6 +52,13 @@ namespace GambitChess.Game.Pieces.Types
             }
         }
 
+        /// <summary>Finds the possible <see cref="Square"/> of the <see cref="Rook"/> to castle with.</summary>
+        /// <param name="threats">All <see cref="Square"/>s under threat by opposing pieces.</param>
+        /// <param name="board">Current board state.</param>
+        /// <param name="x">This piece's current rank position.</param>
+        /// <param name="y">This piece's current file position.</param>
+        /// <param name="xLook">Rank direction to search for the <see cref="Rook"/>.</param>
+        /// <returns>Found <see cref="Square"/> if castling possible; null otherwise.</returns>
         private Square? FindCastlingTarget(ISet<Square> threats, IBoardState board, int x, int y, int xLook)
         {
             int xTarget = x;

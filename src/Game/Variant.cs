@@ -6,6 +6,7 @@ using GambitChess.Game.Pieces.Types;
 
 namespace GambitChess.Game
 {
+    /// <summary>Chess rule sets to play.</summary>
     public static class Variant
     {
         /// <summary>Regular chess.</summary>
@@ -24,6 +25,11 @@ namespace GambitChess.Game
                 new Queen(s)
             }, new[] { Side.White, Side.Black }));
 
+        /// <summary>Generates pieces for each side.</summary>
+        /// <param name="nonPromotable">Pieces that others can't change into.</param>
+        /// <param name="promotable">Pieces that others can change to.</param>
+        /// <param name="sides">Sides to generate for.</param>
+        /// <returns>The generated pieces.</returns>
         private static IPiece[] CreatePieces(
             Func<Side, IEnumerable<IPiece>, IEnumerable<IPiece>> nonPromotable,
             Func<Side, IEnumerable<IPiece>> promotable,

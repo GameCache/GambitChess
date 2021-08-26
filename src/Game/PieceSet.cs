@@ -7,7 +7,7 @@ using GambitChess.Game.Pieces;
 
 namespace GambitChess.Game
 {
-    /// <summary></summary>
+    /// <summary>Pieces and default setup to use for a game.</summary>
     public sealed class PieceSet
     {
         /// <summary>Largest X change any piece will attempt.</summary>

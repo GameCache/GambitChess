@@ -7,22 +7,28 @@ using GambitChess.Game.Pieces.Types;
 
 namespace GambitChess.Game.Boards
 {
+    /// <inheritdoc cref="IBoardEngine"/>
     internal sealed class BoardEngine : IBoardEngine, IBoardState
     {
+        /// <summary>Pieces used for the game.</summary>
         private readonly PieceSet _set;
 
+        /// <summary>Actual board representation.</summary>
         private readonly Square[][] _tiles;
 
+        /// <summary>Turn tracker.</summary>
         private readonly TurnKeeper _turnOrder;
 
+        /// <summary>Moves currently made.</summary>
         private readonly IList<IMove> _history = new List<IMove>();
 
+        /// <summary>When a square was first changed.</summary>
         private readonly IDictionary<Square, int> _changed;
 
         /// <summary>Initializes a new instance of the <see cref="BoardEngine"/> class.</summary>
-        /// <param name="set"></param>
-        /// <param name="setup"></param>
-        /// <param name="turn"></param>
+        /// <param name="set">Pieces used for the game.</param>
+        /// <param name="setup">Current board representation state to use.</param>
+        /// <param name="turn">Turn tracker.</param>
         public BoardEngine(PieceSet set, Square[][] setup, TurnKeeper turn)
         {
             _set = set;
@@ -262,7 +268,8 @@ namespace GambitChess.Game.Boards
             return result.ToString();
         }
 
-        internal string DebugPrint()
+        /// <inheritdoc/>
+        public string DebugPrint()
         {
             StringBuilder result = new();
             for (int i = 0; i < _tiles.Length; i++)

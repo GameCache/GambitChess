@@ -7,53 +7,53 @@ namespace GambitChess.Game.Moves
     /// <summary>Represents a standard chess move on a board.</summary>
     internal class Move : IMove
     {
-        /// <inheritdoc/>
-        public bool IsCapture => Capture != null;
-
         /// <summary>Piece origin.</summary>
-        public Square Start { get; }
+        private readonly Square _start;
 
         /// <summary>Target destination.</summary>
-        public Square End { get; }
+        private readonly Square _end;
 
         /// <summary>Piece originally at the destination.</summary>
-        private IPiece? Capture { get; }
+        private readonly IPiece? _capture;
+
+        /// <inheritdoc/>
+        public bool IsCapture => _capture != null;
 
         /// <summary>Initializes a new instance of the <see cref="Move"/> class.</summary>
         /// <param name="start">Piece origin.</param>
         /// <param name="end">Target destination.</param>
         public Move(Square start, Square end)
         {
-            Start = start;
-            End = end;
-            Capture = End.Content;
+            _start = start;
+            _end = end;
+            _capture = _end.Content;
         }
 
         /// <inheritdoc/>
         public void Make()
         {
-            End.Content = Start.Content;
-            Start.Content = null;
+            _end.Content = _start.Content;
+            _start.Content = null;
         }
 
         /// <inheritdoc/>
         public void Undo()
         {
-            Start.Content = End.Content;
-            End.Content = Capture;
+            _start.Content = _end.Content;
+            _end.Content = _capture;
         }
 
         /// <inheritdoc/>
         public IEnumerable<Square> Changes()
         {
-            yield return Start;
-            yield return End;
+            yield return _start;
+            yield return _end;
         }
 
         /// <inheritdoc/>
         public override string ToString()
         {
-            return Start.ToString() + (Capture == null ? '-' : 'x') + End.ToString();
+            return _start.ToString() + (_capture == null ? '-' : 'x') + _end.ToString();
         }
     }
 }

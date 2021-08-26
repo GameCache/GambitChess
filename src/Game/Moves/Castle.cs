@@ -4,14 +4,21 @@ using GambitChess.Game.Boards;
 
 namespace GambitChess.Game.Moves
 {
+    /// <summary>Represents a castling move.</summary>
     internal sealed class Castle : IMove
     {
-        public bool IsCapture { get; } = false;
-
+        /// <summary>King reposition.</summary>
         private readonly Move _kingMove;
 
+        /// <summary>Rook reposition.</summary>
         private readonly Move _rookMove;
 
+        /// <inheritdoc/>
+        public bool IsCapture { get; } = false;
+
+        /// <summary>Initializes a new instance of the <see cref="Castle"/> class.</summary>
+        /// <param name="kingMove">King reposition.</param>
+        /// <param name="rookMove">Rook reposition.</param>
         public Castle(Move kingMove, Move rookMove)
         {
             _kingMove = kingMove;

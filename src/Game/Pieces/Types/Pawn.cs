@@ -8,20 +8,22 @@ namespace GambitChess.Game.Pieces.Types
     /// <inheritdoc/>
     internal sealed class Pawn : Piece
     {
+        /// <summary>Which pieces this piece can change to when reaching a promoteable <see cref="Square"/>.</summary>
         private readonly IPiece[] _promotions;
 
+        /// <summary>Direction of the file movement for this piece.</summary>
         private readonly int _changeY;
 
-        /// <summary>Initializes a new instance of the <see cref="Pawn"/> class.</summary>
-        /// <param name="side"></param>
-        /// <param name="promotions"></param>
+        /// <inheritdoc cref="Pawn(Side,IEnumerable{IPiece},int)"/>
         internal Pawn(Side side, IEnumerable<IPiece> promotions)
          : this(side, promotions, (side == Side.White) ? -1 : 1) { }
 
         /// <summary>Initializes a new instance of the <see cref="Pawn"/> class.</summary>
-        /// <param name="side"></param>
-        /// <param name="promotions"></param>
-        /// <param name="changeY"></param>
+        /// <param name="side">Which side this piece is on.</param>
+        /// <param name="promotions">
+        ///     Which pieces this piece can change to when reaching a promoteable <see cref="Square"/>.
+        /// </param>
+        /// <param name="changeY">Direction of the file movement for this piece.</param>
         private Pawn(Side side, IEnumerable<IPiece> promotions, int changeY)
             : base((side == Side.White) ? 'P' : 'p', new Movement[]
         {

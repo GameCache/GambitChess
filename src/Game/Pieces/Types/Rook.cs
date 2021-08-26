@@ -4,7 +4,7 @@ namespace GambitChess.Game.Pieces.Types
     internal sealed class Rook : Piece
     {
         /// <summary>Initializes a new instance of the <see cref="Rook"/> class.</summary>
-        /// <param name="side"></param>
+        /// <param name="side">Which side this piece is on.</param>
         internal Rook(Side side) : base((side == Side.White) ? 'R' : 'r', new Movement[]
         {
             new Movement(-1, 0, true, true, false),
