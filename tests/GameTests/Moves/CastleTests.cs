@@ -58,5 +58,11 @@ namespace GambitChess.GameTests.Moves
         {
             move.IsCapture.Assert().Is(false);
         }
+
+        [Theory, RandomData]
+        internal static void ToString_Detailed(Castle move)
+        {
+            move.ToString().Assert().ContainsNot(nameof(Castle));
+        }
     }
 }

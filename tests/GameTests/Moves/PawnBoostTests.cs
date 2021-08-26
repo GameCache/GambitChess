@@ -47,5 +47,11 @@ namespace GambitChess.GameTests.Moves
         {
             new PawnBoost(start, end, skipped).Skipped.Assert().Is(skipped);
         }
+
+        [Theory, RandomData]
+        internal static void ToString_Detailed(PawnBoost move)
+        {
+            move.ToString().Assert().ContainsNot(nameof(PawnBoost));
+        }
     }
 }

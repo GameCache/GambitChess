@@ -47,5 +47,11 @@ namespace GambitChess.GameTests.Moves
             end.Content = null;
             new Promote(start, end, promotion).IsCapture.Assert().Is(false);
         }
+
+        [Theory, RandomData]
+        internal static void ToString_Detailed(Promote move)
+        {
+            move.ToString().Assert().ContainsNot(nameof(Promote));
+        }
     }
 }

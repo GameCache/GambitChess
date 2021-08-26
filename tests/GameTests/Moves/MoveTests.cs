@@ -49,5 +49,11 @@ namespace GambitChess.GameTests.Moves
             end.Content = null;
             new Move(start, end).IsCapture.Assert().Is(false);
         }
+
+        [Theory, RandomData]
+        internal static void ToString_Detailed(Move move)
+        {
+            move.ToString().Assert().ContainsNot(nameof(Move));
+        }
     }
 }

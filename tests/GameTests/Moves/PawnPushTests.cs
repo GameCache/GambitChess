@@ -49,5 +49,11 @@ namespace GambitChess.GameTests.Moves
             end.Content = null;
             new PawnPush(start, end).IsCapture.Assert().Is(false);
         }
+
+        [Theory, RandomData]
+        internal static void ToString_Detailed(PawnPush move)
+        {
+            move.ToString().Assert().ContainsNot(nameof(PawnPush));
+        }
     }
 }
