@@ -78,7 +78,7 @@ namespace GambitChess.Game.Pieces
 
                     if (content == null)
                     {
-                        if (!next.MustCapture && (next.CanCapture || !onlyThreats))
+                        if (!next.MustCapture || (next.CanCapture && onlyThreats))
                         {
                             yield return target;
                         }

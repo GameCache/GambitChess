@@ -125,6 +125,12 @@ namespace GambitChess.Game.Boards
         }
 
         /// <inheritdoc/>
+        public Square? GetEnPassantTarget()
+        {
+            return (_history.LastOrDefault() as PawnBoost)?.Skipped;
+        }
+
+        /// <inheritdoc/>
         public bool HasChanged(Square location)
         {
             return _changed[location] > -1;
@@ -248,6 +254,8 @@ namespace GambitChess.Game.Boards
             }
 
             _ = result.Append(' ').Append(castling.Length == 0 ? "-" : castling);
+
+            _ = result.Append(' ').Append(GetEnPassantTarget()?.ToString() ?? "-");
 
             int lastCap = 0;
             for (int i = _history.Count - 1; i > 0; i--)

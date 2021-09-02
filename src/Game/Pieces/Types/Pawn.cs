@@ -53,7 +53,8 @@ namespace GambitChess.Game.Pieces.Types
                     yield return new PawnPush(container, target);
                 }
             }
-            if (container.PawnBoost)
+
+            if (container.PawnBoost && !board.HasChanged(container))
             {
                 Square skipped = board.CheckSpace(x, y + _changeY);
                 if (skipped.Content == null)
@@ -63,6 +64,19 @@ namespace GambitChess.Game.Pieces.Types
                     {
                         yield return new PawnBoost(container, target, skipped);
                     }
+                }
+            }
+
+            Square? potentialTarget = board.GetEnPassantTarget();
+            if (potentialTarget != null)
+            {
+                if (board.CheckSpace(x + 1, y + _changeY) == potentialTarget)
+                {
+                    yield return new EnPassant(container, potentialTarget, board.CheckSpace(x + 1, y));
+                }
+                else if (board.CheckSpace(x - 1, y + _changeY) == potentialTarget)
+                {
+                    yield return new EnPassant(container, potentialTarget, board.CheckSpace(x - 1, y));
                 }
             }
         }

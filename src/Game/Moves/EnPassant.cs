@@ -4,8 +4,8 @@ using GambitChess.Game.Pieces;
 
 namespace GambitChess.Game.Moves
 {
-    /// <summary>Represents a piece promotion move.</summary>
-    internal sealed class Promote : IMove
+    /// <summary>Represents a special Pawn capture on a board.</summary>
+    internal class EnPassant : IMove
     {
         /// <summary>Piece origin.</summary>
         private readonly Square _start;
@@ -13,44 +13,41 @@ namespace GambitChess.Game.Moves
         /// <summary>Target destination.</summary>
         private readonly Square _end;
 
-        /// <summary>Original piece to promote from.</summary>
-        private readonly IPiece? _original;
+        /// <summary>Location for the piece being captured.</summary>
+        private readonly Square _captureLocation;
 
-        /// <summary>Piece originally at the destination.</summary>
+        /// <summary>Piece being captured.</summary>
         private readonly IPiece? _capture;
-
-        /// <summary>New piece to promote to.</summary>
-        private readonly IPiece _promotion;
 
         /// <inheritdoc/>
         public bool IsCapture => _capture != null;
 
-        /// <summary>Initializes a new instance of the <see cref="Promote"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="Move"/> class.</summary>
         /// <param name="start">Piece origin.</param>
         /// <param name="end">Target destination.</param>
-        /// <param name="promotion">New piece to promote to.</param>
-        public Promote(Square start, Square end, IPiece promotion)
+        /// <param name="captureLocation">Location for the piece being captured.</param>
+        public EnPassant(Square start, Square end, Square captureLocation)
         {
             _start = start;
             _end = end;
-            _promotion = promotion;
-
-            _original = _start.Content;
-            _capture = _end.Content;
+            _captureLocation = captureLocation;
+            _capture = _captureLocation.Content;
         }
 
         /// <inheritdoc/>
         public void Make()
         {
-            _end.Content = _promotion;
+            _end.Content = _start.Content;
             _start.Content = null;
+            _captureLocation.Content = null;
         }
 
         /// <inheritdoc/>
         public void Undo()
         {
-            _start.Content = _original;
-            _end.Content = _capture;
+            _start.Content = _end.Content;
+            _end.Content = null;
+            _captureLocation.Content = _capture;
         }
 
         /// <inheritdoc/>
@@ -58,12 +55,13 @@ namespace GambitChess.Game.Moves
         {
             yield return _start;
             yield return _end;
+            yield return _captureLocation;
         }
 
         /// <inheritdoc/>
         public override string ToString()
         {
-            return _start.ToString() + (_capture == null ? '-' : 'x') + _end.ToString() + '=' + _promotion;
+            return _start.ToString() + (_capture == null ? '-' : 'x') + _end.ToString();
         }
     }
 }
