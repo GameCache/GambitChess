@@ -7,7 +7,7 @@ namespace GambitChess.Game.Boards
     internal sealed class PlayerBoard : IPlayerBoard
     {
         /// <summary>Engine running the actual game.</summary>
-        private readonly IBoardEngine _board;
+        internal readonly IBoardEngine _board;
 
         /// <summary>Initializes a new instance of the <see cref="PlayerBoard"/> class.</summary>
         /// <param name="board">Engine running the actual game.</param>

@@ -11,10 +11,10 @@ namespace GambitChess.Game
     public sealed class PieceSet
     {
         /// <summary>Largest X change any piece will attempt.</summary>
-        public int MaxStepX { get; }
+        internal int MaxStepX { get; }
 
         /// <summary>Largest Y change any piece will attempt.</summary>
-        public int MaxStepY { get; }
+        internal int MaxStepY { get; }
 
         /// <summary>Possible pieces to use.</summary>
         internal IDictionary<string, IPiece> Pieces { get; }
@@ -87,7 +87,7 @@ namespace GambitChess.Game
         private Square[][] CreateBoardTiles(string[] rows)
         {
             int height = rows.Length;
-            int width = rows.Max(r => r.Length);
+            int width = rows.Max(r => CountSize(r));
 
             Square[][] tiles = new Square[MaxStepY * 2 + height][];
 
@@ -108,6 +108,31 @@ namespace GambitChess.Game
             }
 
             return tiles;
+        }
+
+        /// <summary>Finds how many squares are in the row.</summary>
+        /// <param name="row">Notation for a row to count.</param>
+        /// <returns>Calculated size.</returns>
+        private int CountSize(string row)
+        {
+            int size = 0;
+            int skip = 0;
+
+            for (int i = 0; i < row.Length; i++)
+            {
+                string next = row[i].ToString();
+
+                if (Pieces.ContainsKey(next))
+                {
+                    size += skip + 1;
+                    skip = 0;
+                }
+                else
+                {
+                    skip = skip * 10 + int.Parse(next, CultureInfo.InvariantCulture);
+                }
+            }
+            return size + skip;
         }
     }
 }
