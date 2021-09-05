@@ -11,7 +11,7 @@ namespace GambitChess.Game
     {
         /// <summary>Regular chess.</summary>
         public static PieceSet Standard { get; } = new PieceSet(
-            "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+            "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0",
             new[] { Side.White, Side.Black },
             CreatePieces((s, p) => new IPiece[]
             {

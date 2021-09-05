@@ -20,7 +20,7 @@ namespace GambitChess.Game.Moves
         private readonly IPiece? _capture;
 
         /// <inheritdoc/>
-        public bool IsCapture => _capture != null;
+        public bool IsCapture { get; } = true;
 
         /// <summary>Initializes a new instance of the <see cref="Move"/> class.</summary>
         /// <param name="start">Piece origin.</param>
@@ -61,7 +61,7 @@ namespace GambitChess.Game.Moves
         /// <inheritdoc/>
         public override string ToString()
         {
-            return _start.ToString() + (_capture == null ? '-' : 'x') + _end.ToString();
+            return _start.ToString() + 'x' + _end.ToString();
         }
     }
 }

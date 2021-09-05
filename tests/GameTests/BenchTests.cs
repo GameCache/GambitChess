@@ -1,30 +1,17 @@
-﻿using CreateAndFake.Fluent;
-using GambitChess.Game;
+﻿using GambitChess.Game;
 using GambitChess.Game.Boards;
 using GambitChess.Game.Moves;
 using Xunit;
 
-namespace GambitChess.GameTests
+namespace GambitChess.GameTests.Boards
 {
-    public static class BoardTests
+    public static class BenchTests
     {
         [Fact]
-        internal static void Test()
-        {
-            Variant.Standard.SetupBoard().DebugPrint().Assert().IsNot(null);
-        }
-
-        [Fact]
-        internal static void Test2()
-        {
-            Variant.Standard.SetupBoard().ToString().Assert().IsNot(null);
-        }
-
-        [Fact]
-        internal static void BenchTest()
+        internal static void SimpleBenchmark()
         {
             IBoardEngine board = ((PlayerBoard)Variant.Standard.SetupBoard())._board;
-            GameLoop(0, board, 5).Assert().Fail();
+            GameLoop(0, board, 4);//.Assert().Fail();
         }
 
         private static int GameLoop(int current, IBoardEngine board, int max)
@@ -34,12 +21,13 @@ namespace GambitChess.GameTests
             {
                 foreach (IMove move in board.GenerateMoves())
                 {
+                    count += 1;
                     board.Make(move);
                     count += GameLoop(current + 1, board, max);
                     board.Undo();
                 }
             }
-            return count + 1;
+            return count;
         }
     }
 }

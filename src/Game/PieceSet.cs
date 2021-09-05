@@ -51,7 +51,8 @@ namespace GambitChess.Game
         /// <returns>The created board representing <paramref name="position"/>.</returns>
         public IPlayerBoard SetupBoard(string position)
         {
-            string[] rows = (position ?? _defaultFen).Split("/");
+            string[] states = (position ?? _defaultFen).Split(" ");
+            string[] rows = states[0].Split("/");
 
             Square[][] tiles = CreateBoardTiles(rows);
 
@@ -78,7 +79,17 @@ namespace GambitChess.Game
                 }
             }
 
-            return new PlayerBoard(new BoardEngine(this, tiles, new TurnKeeper(0, _turnOrder)));
+            TurnKeeper tracker;
+            if (states.Length > 1 && states[1] == "b")
+            {
+                tracker = new TurnKeeper(1, _turnOrder);
+            }
+            else
+            {
+                tracker = new TurnKeeper(0, _turnOrder);
+            }
+
+            return new PlayerBoard(new BoardEngine(this, tiles, tracker));
         }
 
         /// <summary>Creates a blank tile set to hold <paramref name="rows"/>.</summary>

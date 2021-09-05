@@ -197,6 +197,46 @@ namespace GambitChess.Game.Boards
 
             _ = result.Append(' ').Append(_turnOrder.CurrentTurn == Side.White ? 'w' : 'b');
 
+            _ = result.Append(' ').Append(FindCastlingRights(
+                whiteKing, whiteKingX, whiteKingY, blackKing, blackKingX, blackKingY));
+
+            _ = result.Append(' ').Append(GetEnPassantTarget()?.ToString() ?? "-");
+
+            int lastCap = 0;
+            for (int i = _history.Count - 1; i >= 0; i--)
+            {
+                if (_history[i].GetType() != typeof(Move) || _history[i].IsCapture)
+                {
+                    break;
+                }
+                else
+                {
+                    lastCap++;
+                }
+            }
+            _ = result.Append(' ').Append(lastCap);
+
+            _ = result.Append(' ').Append(1 + _history.Count / 2);
+
+            return result.ToString();
+        }
+
+        /// <summary>Determines the ability to castle.</summary>
+        /// <param name="whiteKing">Square containing the white king.</param>
+        /// <param name="whiteKingX">White king rank.</param>
+        /// <param name="whiteKingY">White king file.</param>
+        /// <param name="blackKing">Square containing the black king.</param>
+        /// <param name="blackKingX">Black king rank.</param>
+        /// <param name="blackKingY">Black king file.</param>
+        /// <returns>FEN representation of castling for the board.</returns>
+        private string FindCastlingRights(
+            Square? whiteKing,
+            int whiteKingX,
+            int whiteKingY,
+            Square? blackKing,
+            int blackKingX,
+            int blackKingY)
+        {
             string castling = "";
             if (whiteKing != null && !HasChanged(whiteKing))
             {
@@ -253,27 +293,7 @@ namespace GambitChess.Game.Boards
                 }
             }
 
-            _ = result.Append(' ').Append(castling.Length == 0 ? "-" : castling);
-
-            _ = result.Append(' ').Append(GetEnPassantTarget()?.ToString() ?? "-");
-
-            int lastCap = 0;
-            for (int i = _history.Count - 1; i > 0; i--)
-            {
-                if (_history[i].GetType() != typeof(Move) || _history[i].IsCapture)
-                {
-                    break;
-                }
-                else
-                {
-                    lastCap++;
-                }
-            }
-            _ = result.Append(' ').Append(lastCap);
-
-            _ = result.Append(' ').Append(1 + _history.Count / 2);
-
-            return result.ToString();
+            return castling.Length == 0 ? "-" : castling;
         }
 
         /// <inheritdoc/>

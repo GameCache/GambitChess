@@ -60,7 +60,7 @@ namespace GambitChess.Game.Pieces.Types
                 if (skipped.Content == null)
                 {
                     Square target = board.CheckSpace(x, y + _changeY * 2);
-                    if (target.Content == null)
+                    if (target.Exists && target.Content == null)
                     {
                         yield return new PawnBoost(container, target, skipped);
                     }

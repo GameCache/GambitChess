@@ -28,21 +28,23 @@ namespace GambitChess.Game.Pieces.Types
             if (!board.HasChanged(container))
             {
                 ISet<Square> threats = board.FindThreatenedSquares();
-
-                Square? kingsideCastle = FindCastlingTarget(threats, board, x, y, 1);
-                if (kingsideCastle != null)
+                if (!threats.Contains(container))
                 {
-                    yield return new Castle(
-                        container, board.CheckSpace(x + 2, y),
-                        kingsideCastle, board.CheckSpace(x + 1, y));
-                }
+                    Square? kingsideCastle = FindCastlingTarget(threats, board, x, y, 1);
+                    if (kingsideCastle != null)
+                    {
+                        yield return new Castle(
+                            container, board.CheckSpace(x + 2, y),
+                            kingsideCastle, board.CheckSpace(x + 1, y));
+                    }
 
-                Square? queensideCastle = FindCastlingTarget(threats, board, x, y, -1);
-                if (queensideCastle != null)
-                {
-                    yield return new Castle(
-                        container, board.CheckSpace(x - 2, y),
-                        queensideCastle, board.CheckSpace(x - 1, y));
+                    Square? queensideCastle = FindCastlingTarget(threats, board, x, y, -1);
+                    if (queensideCastle != null)
+                    {
+                        yield return new Castle(
+                            container, board.CheckSpace(x - 2, y),
+                            queensideCastle, board.CheckSpace(x - 1, y));
+                    }
                 }
             }
 

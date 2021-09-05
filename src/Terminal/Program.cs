@@ -34,10 +34,6 @@ namespace GambitChess.Terminal
                     case "quit":
                         return;
                 }
-                if (input == "quit")
-                {
-                    break;
-                }
             }
         }
     }
