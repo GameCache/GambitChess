@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using static Bullseye.Targets;
 using static SimpleExec.Command;
 
-namespace Build
+namespace GambitChess.Build
 {
     /// <summary>Manages build behavior for the solution.</summary>
     public static class Program
@@ -20,6 +20,7 @@ namespace Build
             Target("default", DependsOn("coverage"));
             Target("restore", Restore);
             Target("compile", DependsOn("restore"), Compile);
+            Target("runConsole", DependsOn("compile"), RunConsole);
             Target("test", DependsOn("compile"), Test);
             Target("coverage", DependsOn("compile"), Coverage);
             await RunTargetsAndExitAsync(args);
@@ -41,6 +42,12 @@ namespace Build
                 await RunAsync($"dotnet", $"build tests/{project}Tests --no-restore --configuration Debug");
                 await RunAsync($"dotnet", $"build tests/{project}Tests --no-restore --configuration Release");
             }
+        }
+
+        /// <summary>Runs the console version.</summary>
+        private static async Task RunConsole()
+        {
+            await RunAsync($"dotnet", $"run src/Terminal --no-restore --no-build --configuration Release");
         }
 
         /// <summary>Tests the solution.</summary>
