@@ -13,7 +13,10 @@ namespace GambitChess.Terminal
             IPlayerBoard game = Variant.Standard.SetupBoard();
             while (true)
             {
-                Console.Clear();
+                if (!Console.IsOutputRedirected)
+                {
+                    Console.Clear();
+                }
                 Console.WriteLine(game);
                 Console.WriteLine(game.DebugPrint());
                 Console.WriteLine(string.Join(',', game.GenerateMoves()));
