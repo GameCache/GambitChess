@@ -8,8 +8,9 @@
         140
     ],
     "cSpell.words": [
-        "Omni",
         "cobertura",
+        "codecov",
+        "Omni",
         "xunit"
     ]
 }
